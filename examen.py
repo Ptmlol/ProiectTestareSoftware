@@ -4,6 +4,11 @@ import sys
 f = open("grades_summed.in", "r")
 g = open("initial_grades.out", "w")
 
+
+def rotate(l, n):
+    return l[n:] + l[:n]
+
+
 try:
     file_content = f.read()
     lines = file_content.strip().split("\n")
@@ -40,7 +45,8 @@ if n % 4 == 1:
         solutions[i-3] = sums[i] - solutions[i]
         solutions[i-1] = sums[i-3] - solutions[i-3]
         i -= 1
-    g.write(str(solutions))
+
+    g.write(str(rotate(solutions, 1)))
     sys.exit()
 
 if n % 4 == 3:
@@ -56,7 +62,7 @@ if n % 4 == 3:
     solutions[1] = sums[n-1] - solutions[n-1]
     for i in range(3, n, 2):
         solutions[i] = sums[i - 2] - solutions[i - 2]
-    g.write(str(solutions))
+    g.write(str(rotate(solutions, 1)))
     sys.exit()
 
 if n % 4 == 2:
@@ -67,6 +73,6 @@ if n % 4 == 2:
         solutions[i+3] = sums[i+1] - solutions[i+1]
         solutions[i] = sums[i+4] - solutions[i+4]
         solutions[i+2] = sums[i] - solutions[i]
-    g.write(str(solutions))
+    g.write(str(rotate(solutions, 1)))
     sys.exit()
 
