@@ -9,6 +9,15 @@ class TestEquivalencePartitioning(unittest.TestCase):
         result = examen.calculate(5, [6, 13, 11, 10, 10])
         self.assertEqual(result, [4, 5, 9, 6, 1])
 
+        result = examen.calculate(6, [6, 13, 11, 10, 11, 12])
+        self.assertEqual(result, [8, 3, 5, 8, 4, 3])
+
+        result = examen.calculate(7, [6, 13, 11, 10, 11, 12, 13])
+        self.assertEqual(result, [11, 2, 2, 9, 8, 2, 4])
+
+        result = examen.calculate(8, [6, 13, 11, 10, 11, 12, 13, 14])
+        self.assertEqual(result, -1)
+
         result = examen.calculate(5, [1000000929, -10000006, 23123120, 232323111, -9282818220])
         self.assertEqual(result, -1)
 
@@ -67,6 +76,7 @@ class BoundaryValueAnalysis(unittest.TestCase):
 
 
 class CategoryPartitioning(unittest.TestCase):
+
     def test_calculate(self):
         result = examen.calculate(-6, None)# n<3
         self.assertEqual(result, -1)
@@ -85,3 +95,24 @@ class CategoryPartitioning(unittest.TestCase):
         result = examen.calculate(100005, None)  # n>100001
         self.assertEqual(result, -1)
 
+
+class StatementCoverage(unittest.TestCase):
+
+    def test_calculate(self):
+        # result = examen.calculate(None, None)  #intra pe toate inafara de 12-28, 33-34, 37-47
+        # self.assertEqual(result, [11, 2, 2, 9, 8, 2, 4])
+
+        result = examen.calculate(3, None)  # nu intra pe 8-27, se opreste la 38
+        self.assertEqual(result, -1)
+
+        result = examen.calculate(4, None)# nu intra pe 8-29, 37-46, 43-52, se opreste la linia 56
+        self.assertEqual(result, -1)
+
+        result = examen.calculate(5, [6, 13, 11, 10, 10]) #intra pe toate inafara de 12-28, 33-34, 37-47, 54-56. 76-112, se opreste la 74
+        self.assertEqual(result, [4, 5, 9, 6, 1])
+
+        result = examen.calculate(6, [6, 13, 11, 10, 11, 12]) #intra pe toate inafara de 12-28, 33-34, 37-47, 54-96, se opreste la 112
+        self.assertEqual(result, [8, 3, 5, 8, 4, 3])
+
+        result = examen.calculate(7, [6, 13, 11, 10, 11, 12, 13])#intra pe toate inafara de 12-28, 33-34, 37-47, 98-112, 54-74
+        self.assertEqual(result, [11, 2, 2, 9, 8, 2, 4])

@@ -31,11 +31,12 @@ def calculate(n=None, sums=None):
     # g.seek(0)
     # g.truncate() daca vrem sa stergem continutul din fisier la fiecare test
     if n is None and sums is None:
-        n, sums = define()
+        n, sums = define()# aici nu se intra cu test
     solutions = [-1] * n
     if not 4 <= n <= 100000:
         g.write(str(-1))
         return -1
+
     try:# pentru a putea scrie None in teste
         if n != len(sums):
             g.write(str(-1))
@@ -43,6 +44,7 @@ def calculate(n=None, sums=None):
     except TypeError:
         g.write(str(-1))
         return -1
+
     n_sum = 0
     for s_grade in sums:
         n_sum += int(s_grade)  # suma totala a sumelor celor 2 vecini
