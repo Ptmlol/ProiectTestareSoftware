@@ -9,6 +9,24 @@ def rotate(li, n):
     return li[n:] + li[:n]
 
 
+def define():
+    try:
+        file_content = f.read()
+        lines = file_content.strip().split("\n")
+        nr = lines.pop(0)
+        nr = int(nr)
+        nested_sums = []
+        g_sums = []
+        for grade in lines:
+            nested_sums.append(grade.split())
+        for i in range(0, len(nested_sums[0])):
+            g_sums.append(int(nested_sums[0][i]))
+        return nr, g_sums
+    except Exception as e:
+        print("Error occurred parsing the file:", e)
+        sys.exit(0)
+
+
 def calculate(n=None, sums=None):
     # g.seek(0)
     # g.truncate() daca vrem sa stergem continutul din fisier la fiecare test
@@ -90,24 +108,6 @@ def calculate(n=None, sums=None):
         solutions = rotate(solutions, 1)
         g.write(str(solutions))
         return solutions
-
-
-def define():
-    try:
-        file_content = f.read()
-        lines = file_content.strip().split("\n")
-        nr = lines.pop(0)
-        nr = int(nr)
-        nested_sums = []
-        g_sums = []
-        for grade in lines:
-            nested_sums.append(grade.split())
-        for i in range(0, len(nested_sums[0])):
-            g_sums.append(int(nested_sums[0][i]))
-        return nr, g_sums
-    except Exception as e:
-        print("Error occurred parsing the file:", e)
-        sys.exit(0)
 
 
 if __name__ == "__main__":
