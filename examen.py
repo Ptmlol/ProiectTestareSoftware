@@ -31,7 +31,7 @@ def calculate(n=None, sums=None):
     # g.seek(0)
     # g.truncate() daca vrem sa stergem continutul din fisier la fiecare test
     if n is None and sums is None:
-        n, sums = define()# aici nu se intra cu test
+        n, sums = define()
     solutions = [-1] * n
     if not 4 <= n <= 100000:
         g.write(str(-1))
