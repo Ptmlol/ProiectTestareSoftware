@@ -5,7 +5,7 @@ import examen
 
 class TestEquivalencePartitioning(unittest.TestCase):
 
-    def test_calculate(self):# equivalence partitioning
+    def test_calculate(self):
         result = examen.calculate(5, [6, 13, 11, 10, 10])
         self.assertEqual(result, [4, 5, 9, 6, 1])
         result = examen.calculate(6, [6, 13, 11, 10, 11, 12])
@@ -26,7 +26,7 @@ class TestEquivalencePartitioning(unittest.TestCase):
         self.assertEqual(result, -1)
 
 
-class BoundaryValueAnalysis(unittest.TestCase):
+class TestBoundaryValueAnalysis(unittest.TestCase):
 
     def test_calculate(self):
         result = examen.calculate(3, None)
@@ -67,7 +67,7 @@ class BoundaryValueAnalysis(unittest.TestCase):
         self.assertEqual(result, -1)
 
 
-class CategoryPartitioning(unittest.TestCase):
+class TestCategoryPartitioning(unittest.TestCase):
 
     def test_calculate(self):
         result = examen.calculate(-6, None)# n<3
@@ -88,7 +88,7 @@ class CategoryPartitioning(unittest.TestCase):
         self.assertEqual(result, -1)
 
 
-class StatementCoverage(unittest.TestCase):
+class TestStatementCoverage(unittest.TestCase):
 
     def test_calculate(self):
         # result = examen.calculate(None, None)  #intra pe toate inafara de 12-28, 33-34, 37-47
@@ -109,7 +109,7 @@ class StatementCoverage(unittest.TestCase):
         self.assertEqual(result, -1)
 
 
-class BranchCoverage(unittest.TestCase):
+class TestBranchCoverage(unittest.TestCase):
     def test_calculate(self):
         result = examen.calculate(4, None)
         self.assertEqual(result, -1)
@@ -123,7 +123,7 @@ class BranchCoverage(unittest.TestCase):
         self.assertEqual(result, -1)
 
 
-class ConditionCoverage(unittest.TestCase):
+class TestConditionCoverage(unittest.TestCase):
     def test_calculate(self):
         result = examen.calculate(4, None)
         self.assertEqual(result, -1)
@@ -135,9 +135,7 @@ class ConditionCoverage(unittest.TestCase):
         self.assertEqual(result, [4, 5, 9, 6, 1])
         result = examen.calculate(4, [6, 13, 11, 10, 10])
         self.assertEqual(result, -1)
-
         result = examen.calculate(100001, None)
         self.assertEqual(result, -1)
-
         result = examen.calculate(5, [509950000, 1099990000, 10950000, 599990000, 1001000000])  # boundry admisibi, ecuatie admisibila N11 + S12
         self.assertEqual(result, [1000000000, 9950000, 99990000, 1000000, 500000000])
