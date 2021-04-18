@@ -1,30 +1,40 @@
-import sys
+import sys # pragma: no mutate
 
 
-f = open("grades_summed.in", "r")
-g = open("initial_grades.out", "w")
+f = open("grades_summed.in", "r") # pragma: no mutate
+g = open("initial_grades.out", "w") # pragma: no mutate
 
 
-def rotate(li, n):
-    return li[n:] + li[:n]
+def rotate(li, n): # pragma: no mutate
+    return li[n:] + li[:n] # pragma: no mutate
 
 
-def define():
-    try:
-        file_content = f.read()
-        lines = file_content.strip().split("\n")
-        nr = lines.pop(0)
-        nr = int(nr)
-        nested_sums = []
-        g_sums = []
-        for grade in lines:
-            nested_sums.append(grade.split())
-        for i in range(0, len(nested_sums[0])):
-            g_sums.append(int(nested_sums[0][i]))
-        return nr, g_sums
-    except Exception as e:
-        print("Error occurred parsing the file:", e)
-        sys.exit(0)
+def print_s(solutions): # pragma: no mutate
+    for initial_grade in solutions: # pragma: no mutate
+        if not -1000000000 <= initial_grade <= 1000000000: # pragma: no mutate
+            g.write(str(-1)) # pragma: no mutate
+            return -1 # pragma: no mutate
+    solutions = rotate(solutions, 1) # pragma: no mutate
+    g.write(str(solutions)) # pragma: no mutate
+    return 1 # pragma: no mutate
+
+
+def define(): # pragma: no mutate
+    try: # pragma: no mutate
+        file_content = f.read() # pragma: no mutate
+        lines = file_content.strip().split("\n") # pragma: no mutate
+        nr = lines.pop(0) # pragma: no mutate
+        nr = int(nr) # pragma: no mutate
+        nested_sums = [] # pragma: no mutate
+        g_sums = [] # pragma: no mutate
+        for grade in lines: # pragma: no mutate
+            nested_sums.append(grade.split()) # pragma: no mutate
+        for i in range(0, len(nested_sums[0])): # pragma: no mutate
+            g_sums.append(int(nested_sums[0][i])) # pragma: no mutate
+        return nr, g_sums # pragma: no mutate
+    except Exception as e: # pragma: no mutate
+        print("Error occurred parsing the file:", e) # pragma: no mutate
+        sys.exit(0) # pragma: no mutate
 
 
 def calculate(n=None, sums=None):
@@ -34,15 +44,15 @@ def calculate(n=None, sums=None):
         n, sums = define()
     solutions = [-1] * n
     if not 4 <= n <= 100000:
-        g.write(str(-1))
+        g.write(str(-1))# pragma: no mutate
         return -1
 
-    try:# pentru a putea scrie None in teste
+    try:
         if n != len(sums):
-            g.write(str(-1))
+            g.write(str(-1))# pragma: no mutate
             return -1
     except TypeError:
-        g.write(str(-1))
+        g.write(str(-1))# pragma: no mutate
         return -1
 
     n_sum = 0
@@ -52,7 +62,7 @@ def calculate(n=None, sums=None):
     s = n_sum  # copie suma note initiale
 
     if n % 4 == 0:
-        g.write(str(-1))
+        g.write(str(-1))# pragma: no mutate
         return -1
 
     if n % 4 == 1:
@@ -65,13 +75,10 @@ def calculate(n=None, sums=None):
             solutions[i - 3] = sums[i] - solutions[i]
             solutions[i - 1] = sums[i - 3] - solutions[i - 3]
             i -= 1
-        for initial_grade in solutions:
-            if not -1000000000 <= initial_grade <= 1000000000:
-                g.write(str(-1))
-                return -1
-        solutions = rotate(solutions, 1)
-        g.write(str(solutions))
-        return solutions
+        if print_s(solutions) == 1:
+            return rotate(solutions, 1)
+        else:
+            return -1
 
     if n % 4 == 3:
         for i in range(0, n - 1):
@@ -86,14 +93,10 @@ def calculate(n=None, sums=None):
         solutions[1] = sums[n - 1] - solutions[n - 1]
         for i in range(3, n, 2):
             solutions[i] = sums[i - 2] - solutions[i - 2]
-
-        for initial_grade in solutions:
-            if not -1000000000 <= initial_grade <= 1000000000:
-                g.write(str(-1))
-                return -1
-        solutions = rotate(solutions, 1)
-        g.write(str(solutions))
-        return solutions
+        if print_s(solutions) == 1:
+            return rotate(solutions, 1)
+        else:
+            return -1
 
     if n % 4 == 2:
         for i in range(0, n, 6):
@@ -103,14 +106,11 @@ def calculate(n=None, sums=None):
             solutions[i + 3] = sums[i + 1] - solutions[i + 1]
             solutions[i] = sums[i + 4] - solutions[i + 4]
             solutions[i + 2] = sums[i] - solutions[i]
-        for initial_grade in solutions:
-            if not -1000000000 <= initial_grade <= 1000000000:
-                g.write(str(-1))
-                return -1
-        solutions = rotate(solutions, 1)
-        g.write(str(solutions))
-        return solutions
+        if print_s(solutions) == 1:
+            return rotate(solutions, 1)
+        else:
+            return -1
 
 
-if __name__ == "__main__":
-    calculate()
+if __name__ == "__main__": # pragma: no mutate
+    calculate() # pragma: no mutate
