@@ -162,3 +162,10 @@ class TestCircuitsCoverage(unittest.TestCase):
         self.assertEqual(result, -1)
         result = examen.calculate(5, [509950000, -900010001, 10950000, 599990000, -999000001])
         self.assertEqual(result, -1)
+
+
+class TestMutation(unittest.TestCase):
+
+    def test_calculate(self):
+        result = examen.calculate(None, None)
+        self.assertEqual(result, [2, 2, 8, 9, 3])

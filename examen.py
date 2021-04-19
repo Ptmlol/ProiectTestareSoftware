@@ -40,20 +40,20 @@ def define(): # pragma: no mutate
 def calculate(n=None, sums=None):
     # g.seek(0)
     # g.truncate() daca vrem sa stergem continutul din fisier la fiecare test
-    if n is None and sums is None:
-        n, sums = define()
-    solutions = [-1] * n
-    if not 4 <= n <= 100000:
-        g.write(str(-1))# pragma: no mutate
-        return -1
-
     try:
+        if n is None and sums is None:
+            n, sums = define()
+        solutions = [-1] * n
+        if not 4 <= n <= 100000:
+            g.write(str(-1))# pragma: no mutate
+            return -1  # pragma: no mutate
+
         if n != len(sums):
             g.write(str(-1))# pragma: no mutate
-            return -1
+            return -1  # pragma: no mutate
     except TypeError:
         g.write(str(-1))# pragma: no mutate
-        return -1
+        return -1  # pragma: no mutate
 
     n_sum = 0
     for s_grade in sums:
@@ -63,7 +63,7 @@ def calculate(n=None, sums=None):
 
     if n % 4 == 0:
         g.write(str(-1))# pragma: no mutate
-        return -1
+        return -1  # pragma: no mutate
 
     if n % 4 == 1:
         for i in range(0, n-1):
@@ -78,7 +78,7 @@ def calculate(n=None, sums=None):
         if print_s(solutions) == 1:
             return rotate(solutions, 1)
         else:
-            return -1
+            return -1  # pragma: no mutate
 
     if n % 4 == 3:
         for i in range(0, n - 1):
@@ -96,7 +96,7 @@ def calculate(n=None, sums=None):
         if print_s(solutions) == 1:
             return rotate(solutions, 1)
         else:
-            return -1
+            return -1  # pragma: no mutate
 
     if n % 4 == 2:
         for i in range(0, n, 6):
@@ -109,7 +109,7 @@ def calculate(n=None, sums=None):
         if print_s(solutions) == 1:
             return rotate(solutions, 1)
         else:
-            return -1
+            return -1  # pragma: no mutate
 
 
 if __name__ == "__main__": # pragma: no mutate
